@@ -38,10 +38,13 @@ public class LoginActivity extends ActionBarActivity {
                 String confirm=mConfirmInput.getText().toString();
 
                 if (password.equals(confirm)) {
-                    Log.d(TAG,"Password success");User user=new User(username,password);} else {Log.d(TAG,"Password failure");}
+                    Log.d(TAG,"Password success");
+                    User new_user=new User(username,password);
                     Intent i=new Intent(LoginActivity.this,HomeActivity.class);
-                    i.putExtra(HomeActivity.EXTRA,username);
+                    i.putExtra(HomeActivity.EXTRA,new_user);
                     startActivity(i);
+                } else {Log.d(TAG,"Password failure");}
+
             }
         });
     }
