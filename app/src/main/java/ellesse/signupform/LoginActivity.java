@@ -1,17 +1,49 @@
 package ellesse.signupform;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 public class LoginActivity extends ActionBarActivity {
+
+    private final static String TAG="Login";
+    Button mSubmitButton;
+    EditText mUsernameInput;
+    EditText mPasswordInput;
+    EditText mConfirmInput;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        mSubmitButton=(Button) findViewById(R.id.SubmitButton);
+        mUsernameInput=(EditText) findViewById(R.id.username_hint);
+        mPasswordInput=(EditText) findViewById(R.id.password_hint);
+        mConfirmInput=(EditText) findViewById(R.id.password2_hint);
+
+        mSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username=mUsernameInput.getText().toString();
+                String password=mPasswordInput.getText().toString();
+                String confirm=mConfirmInput.getText().toString();
+
+                if (password.equals(confirm)) {
+                    Log.d(TAG,"Password success");User user=new User(username,password);} else {Log.d(TAG,"Password failure");}
+                    Intent i=new Intent(LoginActivity.this,HomeActivity.class);
+                    i.putExtra(HomeActivity.EXTRA,username);
+                    startActivity(i);
+            }
+        });
     }
 
 
